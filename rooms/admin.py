@@ -58,9 +58,7 @@ class RoomAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Last Details", {"fields": (
-            "host",
-        )})
+        ("Last Details", {"fields": ("host",)}),
     )
 
     list_display = (
@@ -76,6 +74,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_out",
         "instant_book",
         "host",
+        "count_amenities",
     )
 
     list_filter = (
@@ -94,6 +93,12 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rule",
     ]
+
+    def count_amenities(self, obj):
+        print(obj.amenities.all())
+        
+    
+        return "Potato"
 
 
 @admin.register(models.Photo)
