@@ -83,14 +83,16 @@ class Room(core_models.TimeStampedModel):
     house_rule = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
     def __str__(self):
-        print(self.name)
         return self.name
 
     def total_rating(self):
         all_reviews = self.reviews.all()
-        all_ratings = []
 
-        for review in all_reviews:
-            all_ratings.append(review.rating_average())
+        if len(all_reviews) > 0:
+            all_ratings = 0
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return all_ratings / len(all_reviews)
 
-        return 0
+        else:
+            return 0
