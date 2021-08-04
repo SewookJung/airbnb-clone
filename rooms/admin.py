@@ -81,6 +81,7 @@ class RoomAdmin(admin.ModelAdmin):
         "host",
         "count_amenities",
         "count_photos",
+        "total_rating",
     )
 
     list_filter = (
