@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from . import models
 
 
@@ -10,8 +11,6 @@ class ItemAdmin(admin.ModelAdmin):
 
     def used_by(self, obj):
         return obj.rooms.count()
-
-    pass
 
 
 @admin.register(models.Room)
@@ -112,4 +111,7 @@ class RoomAdmin(admin.ModelAdmin):
 class PhotoAdmin(admin.ModelAdmin):
     """Photo Admin Definition"""
 
-    pass
+    list_display = ("__str__", "get_thumnail")
+
+    def get_thumnail(self, obj):
+        return mark_safe(f"<img width=50px src={obj.file.url} />")
