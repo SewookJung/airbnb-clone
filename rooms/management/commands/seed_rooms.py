@@ -1,9 +1,12 @@
 import random
+
 from django.core.management.base import BaseCommand
+from django.contrib.admin.utils import flatten
 from django_seed import Seed
 
-from rooms import models as rooms_models
-from users import models as users_models
+
+from rooms import models as room_models
+from users import models as user_models
 
 
 class Command(BaseCommand):
@@ -20,10 +23,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         number = options.get("number")
         seeder = Seed.seeder()
-        all_users = users_models.User.objects.all()
-        room_types = rooms_models.RoomType.objects.all()
+        all_users = user_models.User.objects.all()
+        room_types = room_models.RoomType.objects.all()
         seeder.add_entity(
-            rooms_models.Room,
+            room_models.Room,
             number,
             {
                 "name": seeder.faker.address(),
@@ -36,5 +39,17 @@ class Command(BaseCommand):
                 "bedrooms": lambda x: random.randint(1, 5),
             },
         )
-        seeder.execute()
+
+        room_pks = seeder.execute()
+        room_pks = flatten(list(room_pks.values()))
+
+        for pk in room_pks:
+            room = room_models.Room.objects.get(pk=pk)
+            for item in range(3, random.randint(10, 17)):
+                room_models.Photo.objects.create(
+                    caption=seeder.faker.sentence(),
+                    room=room,
+                    file=f"rooms/{item}.jpeg/",
+                )
+
         self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
