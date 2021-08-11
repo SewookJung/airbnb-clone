@@ -7,7 +7,6 @@
   "python.linting.flake8Args": ["--max-line-length=88"],
   "python.pythonPath": "/Users/sewookjung/.local/share/virtualenvs/airbnb-clone-IWKQjcjk/bin/python",
   "python.autoComplete.extraPaths": ["${workspaceFolder}/customModule"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
