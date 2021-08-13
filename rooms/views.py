@@ -15,5 +15,5 @@ class HomeView(ListView):
 
 
 def home_detail(request, pk):
-    print(pk)
-    return render(request, "rooms/detail.html", {"pk": pk})
+    room = models.Room.objects.get(pk=pk)
+    return render(request, "rooms/detail.html", {"room": room})
