@@ -5,7 +5,9 @@
 {% block content %}
 
 {% for room in object_list %}
-<h5>{{room.name}} / {{room.price}}</h5>
+<a href="{% url "rooms:detail" room.pk %}">
+    <h5>{{room.name}}/ {{room.price}}</h5>
+</a>
 {% endfor %}
 
 {% if page_obj.has_previous %}
