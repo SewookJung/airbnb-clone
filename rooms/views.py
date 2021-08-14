@@ -19,5 +19,6 @@ def home_detail(request, pk):
     try:
         room = models.Room.objects.get(pk=pk)
         return render(request, "rooms/detail.html", {"room": room})
+
     except models.Room.DoesNotExist:
         return redirect(reverse("core:home"))
