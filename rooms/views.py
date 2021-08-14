@@ -1,8 +1,4 @@
-from django.views.generic import ListView
-from django.http import Http404
-from django.shortcuts import render, redirect
-from django.urls import reverse
-
+from django.views.generic import ListView, DetailView
 from . import models
 
 
@@ -16,10 +12,7 @@ class HomeView(ListView):
     page_kwarg = "page"
 
 
-def home_detail(request, pk):
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/detail.html", {"room": room})
+class RoomDetail(DetailView):
+    """RoomDetail Definition"""
 
-    except models.Room.DoesNotExist:
-        raise Http404()
+    model = models.Room
