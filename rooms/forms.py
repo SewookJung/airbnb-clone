@@ -14,11 +14,15 @@ class SearchForm(forms.Form):
     beds = forms.IntegerField(required=False)
     baths = forms.IntegerField(required=False)
     bedrooms = forms.IntegerField(required=False)
-    Superhost = forms.BooleanField(required=False)
-    Instant_book = forms.BooleanField(required=False)
-    Amenities = forms.ModelMultipleChoiceField(
-        models.Amenity.objects.all(), widget=forms.CheckboxSelectMultiple()
+    superhost = forms.BooleanField(required=False)
+    instant_book = forms.BooleanField(required=False)
+    amenities = forms.ModelMultipleChoiceField(
+        models.Amenity.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+        required=False,
     )
-    Facilities = forms.ModelMultipleChoiceField(
-        models.Facility.objects.all(), widget=forms.CheckboxSelectMultiple()
+    facilities = forms.ModelMultipleChoiceField(
+        models.Facility.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+        required=False,
     )
